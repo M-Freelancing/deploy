@@ -87,17 +87,9 @@ function App() {
     event.preventDefault();   
     
     var paramObj = {
-        max: 100000,
-        type: 'C',
-        freq: 'A',
-        px: 'HS',
-        ps: '2020',//timeSelected[0].value,
-        r: 'all',
-        p: 'world',
-        rg: 'all',
+      
         cc: ccSelected,//'AG2',//ccSelected[0].value,
-        fmt: 'json',
-        IMTS: '2010'
+    
     }
     localStorage.setItem('HSOptions', JSON.stringify(ccSelected))
 
