@@ -6,11 +6,11 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import Select from 'react-select';
 import Typography from '@material-ui/core/Typography'
-import AnnualConnector from './WebDataConnector/tableSchema_Annual';
+import AnnualConnector from './WebDataConnector/tableSchema';
 import escapeRegExp from "lodash/escapeRegExp";
 import HS_Data from './HS_JsonData';
 
-const MAX_DISPLAYED_OPTIONS = 100;
+const MAX_DISPLAYED_OPTIONS = 25;
 
 const { tableau } = window;
 let connector = AnnualConnector();
