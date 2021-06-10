@@ -3,29 +3,10 @@ const HS_Data = {
 	"minimumInputLength": 2,
 	"classCode": "HS",
 	"className": "HS (as reported)",
-	"results": [{
-		value: "ALL",
-		label: "ALL - All HS commodities",
-		"parent": "#"
-	},
-	{
-		value: "TOTAL",
-		label: "TOTAL - Total of all HS commodities",
-		"parent": "#"
-	},
-	{
-		value: "AG2",
-		label: "AG2 - All 2-digit HS commodities",
-		"parent": "#"
-	},
+	 "results": [
 	{
 		value: "AG4",
 		label: "AG4 - All 4-digit HS commodities",
-		"parent": "#"
-	},
-	{
-		value: "AG6",
-		label: "AG6 - All 6-digit HS commodities",
 		"parent": "#"
 	},
 	{

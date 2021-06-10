@@ -112,7 +112,7 @@ function annualConnector() {
 
     // Download the data
     myConnector.getData = function(table, doneCallback) {
-        var cc_code = JSON.parse(localStorage.getItem('HSOptions'));
+        var cc_code = JSON.parse(tableau.connectionData).cc;
         var cc_string = String(cc_code[0].value)
         if (cc_code.length > 1) {
             for (let c=1; c < cc_code.length; c++) {
@@ -121,21 +121,18 @@ function annualConnector() {
         }
         
         var currentDate = new Date();
-        var currentYear = currentDate.getFullYear();
+        var currentYear = currentDate.getFullYear()-1;
         var array_5_years = [];
         for (let x=0; x<5; x++) array_5_years.push(currentYear-x);
         var array_5_years_string = String(array_5_years[0]);
         for (let y=1; y<5; y++) { array_5_years_string += "%2C"+String(array_5_years[y]) };
 
-        var array_3_years = array_5_years.slice(0,3);
-        var array_3_years_string = String(array_3_years[0]);
-        for (let z=1; z<3; z++) { array_3_years_string += "%2C"+String(array_3_years[z]) };
-
+        var yearForMonthlyTable = currentDate.getMonth() > 5 ? currentDate.getFullYear() : currentDate.getFullYear()-1;
         var apiURL_Annual = "https://comtrade.un.org/api/get?max=100000&type=C&freq=A&px=HS&ps="
                                 + array_5_years_string +
                                 "&r=all&p=0&rg=all&cc="+cc_string+"&fmt=json"
         var apiURL_Monthly = "https://comtrade.un.org/api/get?max=100000&type=C&freq=M&px=HS&ps="
-                                +array_3_years_string+
+                                +String(yearForMonthlyTable)+
                                 "&r=all&p=0&rg=all&cc="+cc_string+"&fmt=json"
         
         if (table.tableInfo.id === 'UNComtradeData_Monthly') {
@@ -155,7 +152,7 @@ function annualConnector() {
                     "ptTitle_m": feat[i].ptTitle,
                     "cmdCode_m": feat[i].cmdCode,
                     "cmdDescE_m": feat[i].cmdDescE,
-                    "NetWeight_m": feat[i].NetWeight,
+                    "NetWeight_m": Math.round(feat[i].NetWeight/1000),
                     "TradeValue_m": feat[i].TradeValue,
                 })
             }table.appendRows(tableData)
@@ -177,7 +174,7 @@ function annualConnector() {
                     "ptTitle": feat_a[j].ptTitle,
                     "cmdCode": feat_a[j].cmdCode,
                     "cmdDescE": feat_a[j].cmdDescE,
-                    "NetWeight": feat_a[j].NetWeight,
+                    "NetWeight": Math.round(feat_a[j].NetWeight/1000),
                     "TradeValue": feat_a[j].TradeValue,
                 })
             }table.appendRows(tableData)

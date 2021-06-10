@@ -39,8 +39,9 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
-  const [ccSelected, setCcSelected] = React.useState(null);
+  const [ccSelected, setCcSelected] = React.useState(JSON.parse(localStorage.getItem('HSOptions')));
   const [inputValue, setInputValue] = React.useState("");
+  const [count, setCount] = React.useState(0);
 
 
   const filteredOptions = React.useMemo(() => {
@@ -73,8 +74,13 @@ function App() {
   );
 
   const handleCcSelect = (selectedOptions) => {
-    setCcSelected(selectedOptions)
-    console.log(selectedOptions)
+    if (count < 20) {
+      console.log(count)
+      setCcSelected(selectedOptions)
+      setCount(selectedOptions.length)
+      console.log(selectedOptions)
+    }
+    
   }
 
   const handleSubmit = (event) => {
